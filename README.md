@@ -1,2 +1,2 @@
-# local-notifications-rn
-React native application which can handles local notifications/reminders
+# local-notifications
+React native application which can handle local notifications/reminders
