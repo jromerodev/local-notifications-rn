@@ -111,7 +111,7 @@ function NotifService(props) {
     });
   }
 
-  const scheduleNotif(soundName) => {
+  const scheduleNotif = (soundName) => {
     this.lastId++;
     PushNotification.localNotificationSchedule({
       date: new Date(Date.now() + 30 * 1000), // in 30 secs
