@@ -1,31 +1,32 @@
-import PushNotification, {Importance} from 'react-native-push-notification';
+import PushNotification, { Importance } from 'react-native-push-notification';
 import NotificationHandler from './NotificationHandler';
+
 
 function NotifService(props) {
 
-   
-  const [register,setRegister] = useState(0);
-  
-  // constructor(onRegister, onNotification) {
-  //   this.lastId = 0;
-  //   this.lastChannelCounter = 0;
+  const [lastId,setLastId] = useState(0);
+     
+  const [lastChannelCounter,setLastChannelCounter] = useState(0);
+  this.lastChannelCounter = 0;
+  setLastId(0)
+  setLastChannelCounter(0)
 
-  //   this.createDefaultChannels();
+    this.createDefaultChannels();
 
-  //   NotificationHandler.attachRegister(onRegister);
-  //   NotificationHandler.attachNotification(onNotification);
+    NotificationHandler.attachRegister(onRegister);
+    NotificationHandler.attachNotification(onNotification);
 
-  //   // Clear badge number at start
-  //   PushNotification.getApplicationIconBadgeNumber(function (number) {
-  //     if (number > 0) {
-  //       PushNotification.setApplicationIconBadgeNumber(0);
-  //     }
-  //   });
+    // Clear badge number at start
+    PushNotification.getApplicationIconBadgeNumber(function (number) {
+      if (number > 0) {
+        PushNotification.setApplicationIconBadgeNumber(0);
+      }
+    });
     
-  //   PushNotification.getChannels(function(channels) {
-  //     console.log(channels);
-  //   });
-  // }
+    PushNotification.getChannels(function(channels) {
+      console.log(channels);
+    });
+
 
   const createDefaultChannels = () => {
     PushNotification.createChannel(
@@ -185,3 +186,11 @@ function useState(arg0: number): [any, any] {
   throw new Error('Function not implemented.');
 }
 
+function onRegister(onRegister: any) {
+  throw new Error('Function not implemented.');
+}
+
+
+function onNotification(onNotification: any) {
+  throw new Error('Function not implemented.');
+}
