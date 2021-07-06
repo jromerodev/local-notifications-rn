@@ -11,27 +11,21 @@ import PushNotification from 'react-native-push-notification';
 //import { RootStateType } from './@types/store';
 
 function App() {
-  // const {
-	// 	requestLoginNotification,
-	// 	token,
-	// } = useSelector((s: RootStateType) => s.session);
+  const [requestLoginNotification, setRequestLoginNotification] = useState(true);
 
 
   const [notification, setNotification] = useState({});
 
-	useEffect(() => {
-		(async () => {
-
-	
-				if (requestLoginNotification) {
-					PushNotification.configure({
-						onRegister: (token) =>
+  useEffect(() => {
+    (async () => {
+      if (requestLoginNotification) {
+        PushNotification.configure({
+          onRegister: (token) =>
             token = token
-					});
-				}
-			
-		})();
-	}, []);
+        });
+      }
+    })();
+  }, []);
 
   const onRegister = (token) => {
     setNotification({
@@ -48,10 +42,8 @@ function App() {
   }
   return (
     <View style={styles.container}>
-
       <View style={styles.spacer}></View>
       <View style={styles.spacer}></View>
-
       <TouchableOpacity
         style={styles.button}
         onPress={() => {
@@ -118,7 +110,6 @@ function App() {
       <View style={styles.spacer}></View>
     </View>
   );
-
 }
 
 const styles = StyleSheet.create({
@@ -158,4 +149,3 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
 });
-
