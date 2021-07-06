@@ -16,7 +16,6 @@ function NotifService(props) {
     NotificationHandler.attachRegister(onRegister);
     NotificationHandler.attachNotification(onNotification);
 
-    // Clear badge number at start
     PushNotification.getApplicationIconBadgeNumber(function (number) {
       if (number > 0) {
         PushNotification.setApplicationIconBadgeNumber(0);

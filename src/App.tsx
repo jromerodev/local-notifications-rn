@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   StyleSheet,
   Text,
@@ -6,25 +6,37 @@ import {
   TouchableOpacity,
   Alert,
 } from 'react-native';
+import PushNotificationIOS from '@react-native-community/push-notification-ios';
+import PushNotification from 'react-native-push-notification';
+//import { RootStateType } from './@types/store';
 
 function App() {
-  //  constructor(props) {
-  //    super(props);
-  //    this.state = {};
-
-  //    this.notif = new NotifService(
-  //      this.onRegister.bind(this),
-  //      this.onNotif.bind(this),
-  //    );
-  //  }
+  // const {
+	// 	requestLoginNotification,
+	// 	token,
+	// } = useSelector((s: RootStateType) => s.session);
 
 
+  const [notification, setNotification] = useState({});
+
+	useEffect(() => {
+		(async () => {
+
+	
+				if (requestLoginNotification) {
+					PushNotification.configure({
+						onRegister: (token) =>
+            token = token
+					});
+				}
+			
+		})();
+	}, []);
 
   const onRegister = (token) => {
-
-    // setNotification({
-    //   registerToken: token.token, fcmRegistered: true
-    // });
+    setNotification({
+      registerToken: token.token, fcmRegistered: true
+    });
   }
 
   const onNotif = (notif) => {
@@ -146,3 +158,4 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
 });
+
