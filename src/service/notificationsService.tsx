@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import PushNotification, { Importance } from 'react-native-push-notification';
 import NotificationHandler from './NotificationHandler';
 
@@ -32,23 +33,22 @@ function NotifService(props) {
       {
         channelId: "default-channel-id", // (required)
         channelName: `Default channel`, // (required)
-        channelDescription: "A default channel", // (optional) default: undefined.
-        soundName: "default", // (optional) See `soundName` parameter of `localNotification` function
-        importance: Importance.HIGH, // (optional) default: Importance.HIGH. Int value of the Android notification importance
-        vibrate: true, // (optional) default: true. Creates the default vibration pattern if true.
+        channelDescription: "A default channel",
+        importance: Importance.HIGH,
+        vibrate: true, 
       },
       (created) => console.log(`createChannel 'default-channel-id' returned '${created}'`) // (optional) callback returns whether the channel was created, false means it already existed.
     );
     PushNotification.createChannel(
       {
-        channelId: "sound-channel-id", // (required)
-        channelName: `Sound channel`, // (required)
-        channelDescription: "A sound channel", // (optional) default: undefined.
-        soundName: "sample.mp3", // (optional) See `soundName` parameter of `localNotification` function
-        importance: Importance.HIGH, // (optional) default: Importance.HIGH. Int value of the Android notification importance
-        vibrate: true, // (optional) default: true. Creates the default vibration pattern if true.
+        channelId: "sound-channel-id",
+        channelName: `Sound channel`,
+        channelDescription: "A sound channel",
+        soundName: "sample.mp3", 
+        importance: Importance.HIGH,
+        vibrate: true,
       },
-      (created) => console.log(`createChannel 'sound-channel-id' returned '${created}'`) // (optional) callback returns whether the channel was created, false means it already existed.
+      (created) => console.log(`createChannel 'sound-channel-id' returned '${created}'`)
     );
   }
 
@@ -58,12 +58,12 @@ function NotifService(props) {
       {
         channelId: "custom-channel-id", // (required)
         channelName: `Custom channel - Counter: ${this.lastChannelCounter}`, // (required)
-        channelDescription: `A custom channel to categorise your custom notifications. Updated at: ${Date.now()}`, // (optional) default: undefined.
-        soundName: "default", // (optional) See `soundName` parameter of `localNotification` function
-        importance: Importance.HIGH, // (optional) default: Importance.HIGH. Int value of the Android notification importance
-        vibrate: true, // (optional) default: true. Creates the default vibration pattern if true.
+        channelDescription: `A custom channel to categorise your custom notifications. Updated at: ${Date.now()}`,
+        soundName: "default", 
+        importance: Importance.HIGH,
+        vibrate: true, 
       },
-      (created) => console.log(`createChannel returned '${created}'`) // (optional) callback returns whether the channel was created, false means it already existed.
+      (created) => console.log(`createChannel returned '${created}'`)
     );
   }
 
@@ -76,79 +76,70 @@ function NotifService(props) {
     PushNotification.localNotification({
       /* Android Only Properties */
       channelId: soundName ? 'sound-channel-id' : 'default-channel-id',
-      ticker: 'My Notification Ticker', // (optional)
-      autoCancel: true, // (optional) default: true
-      largeIcon: 'ic_launcher', // (optional) default: "ic_launcher"
-      smallIcon: 'ic_notification', // (optional) default: "ic_notification" with fallback for "ic_launcher"
-      bigText: 'My big text that will be shown when notification is expanded', // (optional) default: "message" prop
-      subText: 'This is a subText', // (optional) default: none
-      color: 'red', // (optional) default: system default
-      vibrate: true, // (optional) default: true
-      vibration: 300, // vibration length in milliseconds, ignored if vibrate=false, default: 1000
-      tag: 'some_tag', // (optional) add tag to message
-      group: 'group', // (optional) add group to message
-      groupSummary: false, // (optional) set this notification to be the group summary for a group of notifications, default: false
-      ongoing: false, // (optional) set whether this is an "ongoing" notification
-      actions: ['Yes', 'No'], // (Android only) See the doc for notification actions to know more
-      invokeApp: true, // (optional) This enable click on actions to bring back the application to foreground or stay in background, default: true
-
-      when: null, // (optionnal) Add a timestamp pertaining to the notification (usually the time the event occurred). For apps targeting Build.VERSION_CODES.N and above, this time is not shown anymore by default and must be opted into by using `showWhen`, default: null.
-      usesChronometer: false, // (optional) Show the `when` field as a stopwatch. Instead of presenting `when` as a timestamp, the notification will show an automatically updating display of the minutes and seconds since when. Useful when showing an elapsed time (like an ongoing phone call), default: false.
-      timeoutAfter: null, // (optional) Specifies a duration in milliseconds after which this notification should be canceled, if it is not already canceled, default: null
-
+      ticker: 'My Notification Ticker',
+      autoCancel: true,
+      largeIcon: 'ic_launcher',
+      smallIcon: 'ic_notification',
+      bigText: 'My big text that will be shown when notification is expanded',
+      subText: 'This is a subText',
+      color: 'red',
+      vibrate: true,
+      vibration: 300,
+      tag: 'some_tag',
+      group: 'group',
+      groupSummary: false,
+      actions: ['Yes', 'No'],
+      invokeApp: true,
+      when: null,
+      usesChronometer: false,
+      timeoutAfter: null,
       /* iOS only properties */
-      category: '', // (optional) default: empty string
-      subtitle: "Its time to do some exercise! lets go!", // (optional) smaller title below notification title
-
+      category: '',
+      subtitle: "Its time to do some exercise! lets go!",
       /* iOS and Android properties */
-      id: this.lastId, // (optional) Valid unique 32 bit integer specified as string. default: Autogenerated Unique ID
-      title: 'Yana daily reminder ', // (optional)
+      id: this.lastId,
+      title: 'Yana daily reminder ',
       message: 'Wake up early every morning', // (required)
-      userInfo: { screen: 'home' }, // (optional) default: {} (using null throws a JSON value '<null>' error)
-      playSound: !!soundName, // (optional) default: true
-      soundName: soundName ? soundName : 'default', // (optional) Sound to play when the notification is shown. Value of 'default' plays the default sound. It can be set to a custom sound such as 'android.resource://com.xyz/raw/my_sound'. It will look for the 'my_sound' audio file in 'res/raw' directory and play it. default: 'default' (default sound is played)
-      number: 10, // (optional) Valid 32 bit integer specified as string. default: none (Cannot be zero)
+      userInfo: { screen: 'home' },
+      playSound: !!soundName,
+      soundName: soundName ? soundName : 'default',
+      number: 10,
     });
   }
 
   const scheduleNotif = (soundName) => {
     this.lastId++;
     PushNotification.localNotificationSchedule({
-      date: new Date(Date.now() + 30 * 1000), // in 30 secs
-
+      date: new Date(Date.now() + 30 * 1000), 
       /* Android Only Properties */
       channelId: soundName ? 'sound-channel-id' : 'default-channel-id',
-      ticker: 'My Notification Ticker', // (optional)
-      autoCancel: true, // (optional) default: true
-      largeIcon: 'ic_launcher', // (optional) default: "ic_launcher"
-      smallIcon: 'ic_notification', // (optional) default: "ic_notification" with fallback for "ic_launcher"
-      bigText: 'My big text that will be shown when notification is expanded', // (optional) default: "message" prop
-      subText: 'This is a subText', // (optional) default: none
-      color: 'blue', // (optional) default: system default
-      vibrate: true, // (optional) default: true
-      vibration: 300, // vibration length in milliseconds, ignored if vibrate=false, default: 1000
-      tag: 'some_tag', // (optional) add tag to message
-      group: 'group', // (optional) add group to message
-      groupSummary: false, // (optional) set this notification to be the group summary for a group of notifications, default: false
-      ongoing: false, // (optional) set whether this is an "ongoing" notification
-      actions: ['Yes', 'No'], // (Android only) See the doc for notification actions to know more
-      invokeApp: false, // (optional) This enable click on actions to bring back the application to foreground or stay in background, default: true
-
-      when: null, // (optionnal) Add a timestamp pertaining to the notification (usually the time the event occurred). For apps targeting Build.VERSION_CODES.N and above, this time is not shown anymore by default and must be opted into by using `showWhen`, default: null.
-      usesChronometer: false, // (optional) Show the `when` field as a stopwatch. Instead of presenting `when` as a timestamp, the notification will show an automatically updating display of the minutes and seconds since when. Useful when showing an elapsed time (like an ongoing phone call), default: false.
-      timeoutAfter: null, // (optional) Specifies a duration in milliseconds after which this notification should be canceled, if it is not already canceled, default: null
-    
-      /* iOS only properties */
-      category: '', // (optional) default: empty string
-      
+      ticker: 'My Notification Ticker', 
+      autoCancel: true,
+      largeIcon: 'ic_launcher',
+      smallIcon: 'ic_notification',
+      bigText: 'My big text that will be shown when notification is expanded',
+      subText: 'This is a subText',
+      color: 'blue',
+      vibrate: true,
+      vibration: 300,
+      tag: 'some_tag',
+      group: 'group',
+      groupSummary: false,
+      ongoing: false,
+      actions: ['Yes', 'No'],
+      invokeApp: false,
+      when: null,
+      usesChronometer: false, 
+      timeoutAfter: null, 
+      category: '',
       /* iOS and Android properties */
-      id: this.lastId, // (optional) Valid unique 32 bit integer specified as string. default: Autogenerated Unique ID
-      title: 'Yana daily reminder ', // (optional)
-      message: 'Wake up early every morning', // (required)
-      userInfo: { sceen: "home" }, // (optional) default: {} (using null throws a JSON value '<null>' error)
-      playSound: !!soundName, // (optional) default: true
-      soundName: soundName ? soundName : 'default', // (optional) Sound to play when the notification is shown. Value of 'default' plays the default sound. It can be set to a custom sound such as 'android.resource://com.xyz/raw/my_sound'. It will look for the 'my_sound' audio file in 'res/raw' directory and play it. default: 'default' (default sound is played)
-      number: 10, // (optional) Valid 32 bit integer specified as string. default: none (Cannot be zero)
+      id: this.lastId,
+      title: 'Yana daily reminder ',
+      message: 'Wake up early every morning',
+      userInfo: { sceen: "home" },
+      playSound: !!soundName,
+      soundName: soundName ? soundName : 'default',
+      number: 10, 
     });
   }
 
@@ -178,18 +169,12 @@ function NotifService(props) {
 
   const getDeliveredNotifications = (callback) => {
     PushNotification.getDeliveredNotifications(callback);
-  }
-}
+  }  
 
-function useState(arg0: number): [any, any] {
-  throw new Error('Function not implemented.');
-}
+  useEffect(() => {
+		PushNotification.configure({
+			onRegister: ({ token }) => console.log(token);
+		});
+	}, []);
 
-function onRegister(onRegister: any) {
-  throw new Error('Function not implemented.');
-}
-
-
-function onNotification(onNotification: any) {
-  throw new Error('Function not implemented.');
 }

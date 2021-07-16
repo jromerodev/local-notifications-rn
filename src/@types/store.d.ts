@@ -6,7 +6,6 @@ export interface SessionState {
 	requestLoginNotification: boolean;
 }
 
-
 export interface NotificationPayload {
 	id: string;
 }
